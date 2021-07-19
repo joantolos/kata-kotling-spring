@@ -14,7 +14,7 @@ class UserResource(val service: UserService) {
     fun getUsers(): List<User> = service.findMessages()
 
     @RequestMapping(value = ["/users"], method = [RequestMethod.POST])
-    private fun addUser(@RequestBody user: User) {
+    fun addUser(@RequestBody user: User) {
         service.addUser(user)
     }
 }
