@@ -5,11 +5,15 @@ import com.joantolos.kata.kotlin.spring.domain.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(val db: UserRepository) {
+class UserService(val userRepository: UserRepository) {
 
-    fun findMessages(): List<User> = db.findMessages()
+    fun getUsers(): List<User> = userRepository.findUsers()
 
-    fun addUser(user: User){
-        db.addUser(user.username, user.password)
+    fun addUser(user: User) = userRepository.addUser(user.username, user.password)
+
+    fun deleteUser(user: User) {
+        return userRepository.deleteUser(user.username)
     }
+
+    fun updateUser(user: User) = userRepository.updateUser(user.username, user.password)
 }

@@ -2,19 +2,27 @@ package com.joantolos.kata.kotlin.spring.api
 
 import com.joantolos.kata.kotlin.spring.domain.dao.User
 import com.joantolos.kata.kotlin.spring.domain.service.UserService
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
 @RestController
-class UserResource(val service: UserService) {
+class UserResource(val userService: UserService) {
 
     @RequestMapping(value = ["/users"], method = [RequestMethod.GET])
-    fun getUsers(): List<User> = service.findMessages()
+    @ResponseStatus(HttpStatus.OK)
+    fun getUsers(): List<User> = userService.getUsers()
 
     @RequestMapping(value = ["/users"], method = [RequestMethod.POST])
-    fun addUser(@RequestBody user: User) {
-        service.addUser(user)
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addUser(@RequestBody user: User) = userService.addUser(user)
+
+    @RequestMapping(value = ["/users"], method = [RequestMethod.DELETE])
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteUser(@RequestBody user: User) {
+        return userService.deleteUser(user)
     }
+
+    @RequestMapping(value = ["/users"], method = [RequestMethod.PUT])
+    @ResponseStatus(HttpStatus.CREATED)
+    fun updateUser(@RequestBody user: User) = userService.updateUser(user)
 }
