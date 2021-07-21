@@ -11,9 +11,7 @@ class UserService(val userRepository: UserRepository) {
 
     fun addUser(user: User) = userRepository.addUser(user.username, user.password)
 
-    fun deleteUser(user: User) {
-        return userRepository.deleteUser(user.username)
-    }
+    fun deleteUser(user: User) = userRepository.deleteUser(user.username)
 
     fun updateUser(user: User) = userRepository.updateUser(user.username, user.password)
 }

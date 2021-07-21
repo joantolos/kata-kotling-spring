@@ -18,9 +18,7 @@ class UserResource(val userService: UserService) {
 
     @RequestMapping(value = ["/users"], method = [RequestMethod.DELETE])
     @ResponseStatus(HttpStatus.ACCEPTED)
-    fun deleteUser(@RequestBody user: User) {
-        return userService.deleteUser(user)
-    }
+    fun deleteUser(@RequestBody user: User) = userService.deleteUser(user)
 
     @RequestMapping(value = ["/users"], method = [RequestMethod.PUT])
     @ResponseStatus(HttpStatus.CREATED)
